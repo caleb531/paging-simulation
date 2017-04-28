@@ -3,6 +3,8 @@
  * Caleb Evans, Jonathan Tapia
  */
 #include <iostream>
+#include <cstdlib>
+#include <fstream>
 using namespace std;
 
 // Print the basic program information
@@ -12,10 +14,43 @@ void printProgramHeader() {
 	cout << endl;
 }
 
-int main() {
+bool isPowerOfTwo(int n) {
+	if (n == 0){
+		return false;
+	}
+
+	return ((n & (n - 1)) == 0);
+}
+
+int main(int argc, char* argv[]) {
+	int pageSize, physicalMemorySize;
 
 	printProgramHeader();
 
-	return 0;
+	if (argc != 3) {
+		cout << "Usage: " << argv[0] << " Page_Size Physical_Memory_Size"<< endl;
+		return 1;
+	}
 
+
+	pageSize = atoi(argv[1]);
+	physicalMemorySize = atoi(argv[2]);
+
+	if (pageSize < 256 || pageSize > 8192) {
+		cout << "Page_Size must be between 256 and 8192 inclusive" << endl;
+		return 1;
+	}
+	else if (!isPowerOfTwo(pageSize) || !isPowerOfTwo(physicalMemorySize)) {
+		cout << "Page_Size and Physical_Memory_Size must be powers of 2" << endl;
+		return 1;
+	}
+
+
+	ifstream input;
+	input.open("references.txt");
+
+	// Do stuff here
+
+	input.close();
+	return 0;
 }

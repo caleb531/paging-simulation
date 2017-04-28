@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-
+	// Note: atoi() doens't check for valid input
 	pageSize = atoi(argv[1]);
 	physicalMemorySize = atoi(argv[2]);
 
@@ -49,7 +49,15 @@ int main(int argc, char* argv[]) {
 	ifstream input;
 	input.open("references.txt");
 
+	int pageTable[physicalMemorySize / pageSize];
+
 	// Do stuff here
+
+	/*Stuff to do:
+		Determine how to choose between algorithms and how to track data
+		How pagetable entries should be handled (classes, int, ?)
+		How freeframe list should be handeld
+	*/
 
 	input.close();
 	return 0;

@@ -8,6 +8,10 @@
 #include <fstream>
 using namespace std;
 
+// Constants used for byte conversions
+static const int B_TO_KB = 1024;
+static const int KB_TO_MB = 1024;
+
 // Print the basic program information
 void printProgramHeader() {
 	cout << "CS 433 Paging Simulation" << endl;
@@ -47,7 +51,9 @@ int main(int argc, char* argv[]) {
 	printProgramHeader();
 
 	pageSize = getIntArg(argv[1], "page size");
+	// Physical memory size will be given in MB, but must be converted to B
 	physicalMemorySize = getIntArg(argv[2], "physical memory size");
+	physicalMemorySize *= B_TO_KB * KB_TO_MB;
 
 	if (pageSize < 256 || pageSize > 8192) {
 		cout << "Page size must be between 256 and 8192 inclusive" << endl;

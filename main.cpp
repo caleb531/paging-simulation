@@ -49,7 +49,8 @@ int main(int argc, char* argv[]) {
 	ifstream input;
 	input.open("references.txt");
 
-	int pageTable[physicalMemorySize / pageSize];
+	int numPages = physicalMemorySize / pageSize;
+	int pageTable[numPages];
 
 	// Do stuff here
 

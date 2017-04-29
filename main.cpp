@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <sstream>
 #include <fstream>
+#include "PageTable.h"
+#include "ReplacerFIFO.h"
 using namespace std;
 
 // Constants used for byte conversions
@@ -45,6 +47,18 @@ int getIntArg(char* strArg, const char* argLabel) {
 	}
 }
 
+// Get the page number for the given memory reference / binary address
+int getPageNum(int memRef) {
+	return memRef >> 12;
+}
+
+// Return true if the given byte address has write access; otherwise, return
+// false
+bool hasWriteAccess(int memRef) {
+	return memRef % 2 == 1;
+}
+
+
 int main(int argc, char* argv[]) {
 	int pageSize, physicalMemorySize;
 
@@ -71,11 +85,39 @@ int main(int argc, char* argv[]) {
 	// Physical memory size is given in MB, but must be converted to B
 	physicalMemorySize *= B_TO_KB * KB_TO_MB;
 
-	ifstream input;
-	input.open("references.txt");
+	ifstream refFile("references.txt");
 
 	int numPages = physicalMemorySize / pageSize;
-	int pageTable[numPages];
+	cout << "# Pages: " << numPages << endl;
+
+	PageTable* pageTable = new PageTable(numPages);
+
+	Replacer* replacer = new ReplacerFIFO(pageTable);
+
+	int memRef;
+	int i = 0;
+	while (refFile >> memRef) {
+
+		int pageNum = getPageNum(memRef);
+		cout << memRef << " => " << pageNum << endl;
+		bool canWrite = hasWriteAccess(memRef);
+		Page* page = pageTable->pages[pageNum];
+
+		// // Currently, this triggers a segfault if pageNum >= numPages, which
+		// is usually the case (e.g. run program with "8192 16" as arguments)
+		if (hasWriteAccess) {
+			page->dirty = true;
+		}
+
+		replacer->process(pageNum, page);
+
+		// Stop after 100 references (for testing only)
+		i += 1;
+		if (i == 10) {
+			break;
+		}
+
+	}
 
 	// Do stuff here
 
@@ -85,6 +127,9 @@ int main(int argc, char* argv[]) {
 		How freeframe list should be handeld
 	*/
 
-	input.close();
+	delete pageTable;
+	delete replacer;
+
+	refFile.close();
 	return 0;
 }

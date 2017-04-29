@@ -53,8 +53,12 @@ int main(int argc, char* argv[]) {
 		cout << "Page size must be between 256 and 8192 inclusive" << endl;
 		return 1;
 	}
-	else if (!isPowerOfTwo(pageSize) || !isPowerOfTwo(physicalMemorySize)) {
-		cout << "Page size and physical memory size must be powers of 2" << endl;
+	else if (!isPowerOfTwo(pageSize)) {
+		cout << "Page size must be power of 2" << endl;
+		return 1;
+	}
+	else if (!isPowerOfTwo(physicalMemorySize)) {
+		cout << "Physical memory size must be power of 2" << endl;
 		return 1;
 	}
 

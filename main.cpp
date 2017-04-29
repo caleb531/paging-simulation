@@ -51,9 +51,7 @@ int main(int argc, char* argv[]) {
 	printProgramHeader();
 
 	pageSize = getIntArg(argv[1], "page size");
-	// Physical memory size will be given in MB, but must be converted to B
 	physicalMemorySize = getIntArg(argv[2], "physical memory size");
-	physicalMemorySize *= B_TO_KB * KB_TO_MB;
 
 	if (pageSize < 256 || pageSize > 8192) {
 		cout << "Page size must be between 256 and 8192 inclusive" << endl;
@@ -68,6 +66,10 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
+	cout << "Page size: " << pageSize << " B" << endl;
+	cout << "Physical memory size: " << physicalMemorySize << " MB" << endl;
+	// Physical memory size is given in MB, but must be converted to B
+	physicalMemorySize *= B_TO_KB * KB_TO_MB;
 
 	ifstream input;
 	input.open("references.txt");

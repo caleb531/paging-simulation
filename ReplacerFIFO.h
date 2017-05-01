@@ -16,6 +16,7 @@ class ReplacerFIFO : public Replacer {
 	public:
 
 		ReplacerFIFO(PageTable* pageTable);
+		virtual Page* getVictimPage();
 		virtual void process(Page* page);
 
 };

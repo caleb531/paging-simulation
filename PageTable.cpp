@@ -9,4 +9,5 @@ PageTable::PageTable(int numPages, int numFrames) {
 	pages = new Page[numPages];
 	this->numPages = numPages;
 	this->numFrames = numFrames;
+	this->numFreeFrames = numFrames;
 }

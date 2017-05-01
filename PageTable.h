@@ -17,6 +17,8 @@ class PageTable {
 		int numPages;
 		// The total number of frames in physical memory
 		int numFrames;
+		// The total number of available frames
+		int numFreeFrames;
 
 		// Constructor
 		PageTable(int numPages, int numFrames);

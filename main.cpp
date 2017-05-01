@@ -122,6 +122,8 @@ int main(int argc, char* argv[]) {
 		How freeframe list should be handeld
 	*/
 
+	cout << "# Page Faults: " << replacer->numPageFaults << endl;
+
 	delete pageTable;
 	delete replacer;
 

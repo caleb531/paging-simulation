@@ -7,7 +7,6 @@
 #include <sstream>
 #include <fstream>
 #include "PageTable.h"
-#include "FrameList.h"
 #include "ReplacerFIFO.h"
 using namespace std;
 
@@ -95,9 +94,8 @@ int main(int argc, char* argv[]) {
 	cout << "# Frames: " << numFrames << endl;
 
 	PageTable* pageTable = new PageTable(numPages, numFrames);
-	FrameList* freeFrames = new FrameList();
 
-	Replacer* replacer = new ReplacerFIFO(pageTable, freeFrames);
+	Replacer* replacer = new ReplacerFIFO(pageTable);
 
 	int memRef;
 	while (refFile >> memRef) {

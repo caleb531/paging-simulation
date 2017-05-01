@@ -104,8 +104,8 @@ int main(int argc, char* argv[]) {
 		bool canWrite = hasWriteAccess(memRef);
 		Page page = pageTable->pages[pageNum];
 
-		// // Currently, this triggers a segfault if pageNum >= numPages, which
-		// is usually the case (e.g. run program with "8192 16" as arguments)
+		// Currently, this triggers a segfault if pageNum >= numPages, which is
+		// usually the case (e.g. run program with "8192 16" as arguments)
 		if (hasWriteAccess) {
 			page.dirty = true;
 		}

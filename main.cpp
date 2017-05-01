@@ -62,12 +62,11 @@ bool hasWriteAccess(int memRef) {
 
 
 int main(int argc, char* argv[]) {
-	int pageSize, physicalMemorySize;
 
 	printProgramHeader();
 
-	pageSize = getIntArg(argv[1], "page size");
-	physicalMemorySize = getIntArg(argv[2], "physical memory size");
+	int pageSize = getIntArg(argv[1], "page size");
+	int physicalMemorySize = getIntArg(argv[2], "physical memory size");
 
 	if (pageSize < 256 || pageSize > 8192) {
 		cout << "Page size must be between 256 and 8192 inclusive" << endl;

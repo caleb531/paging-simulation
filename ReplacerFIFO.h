@@ -15,7 +15,7 @@ class ReplacerFIFO : public Replacer {
 
 	public:
 
-		ReplacerFIFO(PageTable* pageTable);
+		ReplacerFIFO(PageTable* pageTable, FrameList* freeFrames);
 		virtual void process(Page* page);
 
 };

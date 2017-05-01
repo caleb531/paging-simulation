@@ -9,7 +9,7 @@
 using namespace std;
 
 
-ReplacerFIFO::ReplacerFIFO(PageTable* pageTable) : Replacer(pageTable) {
+ReplacerFIFO::ReplacerFIFO(PageTable* pageTable, FrameList* freeFrames) : Replacer(pageTable, freeFrames) {
 	// Constructor doesn't need to do anything currently
 }
 

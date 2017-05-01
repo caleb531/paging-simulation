@@ -14,7 +14,7 @@ class Replacer {
 	public:
 
 		Replacer(PageTable* pageTable);
-		// Process the given page number and write flag
-		virtual void process(int pageNum, Page* page) = 0;
+		// Process the given page, running the replacement algorithm as needed
+		virtual void process(Page* page) = 0;
 
 };

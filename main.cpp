@@ -108,7 +108,7 @@ int main(int argc, char* argv[]) {
 			page.dirty = true;
 		}
 
-		replacer->process(pageNum, &page);
+		replacer->process(&page);
 
 	}
 

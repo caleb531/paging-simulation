@@ -27,6 +27,6 @@ class Replacer {
 		// Replace the victim page with a new page
 		void replaceVictimPageWith(Page* newPage);
 		// Process the given page, running the replacement algorithm as needed
-		virtual void process(Page* page) = 0;
+		virtual void processPage(Page* page) = 0;
 
 };

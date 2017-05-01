@@ -19,7 +19,7 @@ Page* ReplacerFIFO::getVictimPage() {
 	return victimPage;
 }
 
-void ReplacerFIFO::process(Page* page) {
+void ReplacerFIFO::processPage(Page* page) {
 
 	if (!page->valid) {
 		if (numFreeFrames == 0) {

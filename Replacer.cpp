@@ -12,9 +12,10 @@ Replacer::Replacer(PageTable* pageTable, int numFrames) {
 	numPageFaults = 0;
 }
 
-void Replacer::replaceVictimPageWith(Page* newPage) {
+Page* Replacer::replaceVictimPageWith(Page* newPage) {
 	Page* victimPage = getVictimPage();
 	victimPage->valid = false;
 	newPage->frame = victimPage->frame;
 	numPageFaults += 1;
+	return victimPage;
 }

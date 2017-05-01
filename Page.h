@@ -8,8 +8,12 @@ class Page {
 
 	public:
 
+		// The page number (i.e. the index in the page table where the page can
+		// be found); a value of -1 indicates the page has not been fully
+		// instantiated yet
+		int pageNum;
 		// The frame to which this page is pointing; a value of -1 indicates
-		// that the page is
+		// that the page is not pointing to any frame
 		int frame;
 		// A flag indicating if the page is dirty
 		bool dirty;

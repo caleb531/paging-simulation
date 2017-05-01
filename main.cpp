@@ -138,14 +138,6 @@ int main(int argc, char* argv[]) {
 
 	}
 
-	// Do stuff here
-
-	/*Stuff to do:
-		Determine how to choose between algorithms and how to track data
-		How pagetable entries should be handled (classes, int, ?)
-		How freeframe list should be handeld
-	*/
-
 	cout << "# Page Faults: " << replacer->numPageFaults << endl;
 
 	delete pageTable;

@@ -24,11 +24,11 @@ void printProgramHeader() {
 	cout << endl;
 }
 
+// Return true if the given number is a power of two; otherwise, return false
 bool isPowerOfTwo(int n) {
 	if (n == 0){
 		return false;
 	}
-
 	return ((n & (n - 1)) == 0);
 }
 

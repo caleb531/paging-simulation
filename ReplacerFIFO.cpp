@@ -20,7 +20,6 @@ Page* ReplacerFIFO::getVictimPage() {
 }
 
 void ReplacerFIFO::processPage(Page* page) {
-
 	if (!page->valid) {
 		if (numFreeFrames == 0) {
 			replaceVictimPageWith(page);
@@ -31,5 +30,4 @@ void ReplacerFIFO::processPage(Page* page) {
 		pageQueue.push(page);
 		page->valid = true;
 	}
-
 }

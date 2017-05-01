@@ -7,6 +7,7 @@
 #include <sstream>
 #include <fstream>
 #include "PageTable.h"
+#include "ReplacerRandom.h"
 #include "ReplacerFIFO.h"
 using namespace std;
 
@@ -46,6 +47,27 @@ int getIntArg(char* strArg, const char* argLabel) {
 	} else {
 		cerr << "Invalid " << argLabel << ": " << strArg << endl;
 		exit(1);
+	}
+}
+
+// Prompt the user for a replacement algorithm to run
+Replacer* promptForReplacer(PageTable* pageTable, int numFrames) {
+	cout << "Available replacement algos:" << endl;
+	cout << "  1. Random" << endl;
+	cout << "  2. First-In-First-Out (FIFO)" << endl;
+	cout << "Choose a replacer's number: ";
+	int replacerChoice;
+	cin >> replacerChoice;
+	switch (replacerChoice) {
+		case 1:
+			cout << "You chose Random" << endl;
+			return new ReplacerRandom(pageTable, numFrames);
+		case 2:
+			cout << "You chose FIFO" << endl;
+			return new ReplacerFIFO(pageTable, numFrames);
+		default:
+			cout << "Invalid replacer. Aborting." << endl;
+			exit(1);
 	}
 }
 
@@ -92,10 +114,12 @@ int main(int argc, char* argv[]) {
 	cout << "# Pages: " << numPages << endl;
 	int numFrames = physicalMemorySize / pageSize;
 	cout << "# Frames: " << numFrames << endl;
+	// Print a blank line for readability
+	cout << endl;
 
 	PageTable* pageTable = new PageTable(numPages);
 
-	Replacer* replacer = new ReplacerFIFO(pageTable, numFrames);
+	Replacer* replacer = promptForReplacer(pageTable, numFrames);
 
 	int memRef;
 	while (refFile >> memRef) {

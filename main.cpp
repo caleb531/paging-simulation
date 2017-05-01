@@ -13,6 +13,8 @@ using namespace std;
 // Constants used for byte conversions
 static const int B_TO_KB = 1024;
 static const int KB_TO_MB = 1024;
+// The size of the logical memory (in bytes)
+static const int logicalMemorySize = 128 * B_TO_KB * KB_TO_MB;
 
 // Print the basic program information
 void printProgramHeader() {
@@ -87,7 +89,7 @@ int main(int argc, char* argv[]) {
 
 	ifstream refFile("references.txt");
 
-	int numPages = physicalMemorySize / pageSize;
+	int numPages = logicalMemorySize / pageSize;
 	cout << "# Pages: " << numPages << endl;
 
 	PageTable* pageTable = new PageTable(numPages);

@@ -13,7 +13,12 @@ class PageTable {
 		// The table of page data
 		Page* pages;
 
+		// The total number of pages in logical memory
+		int numPages;
+		// The total number of frames in physical memory
+		int numFrames;
+
 		// Constructor
-		PageTable(int numPages);
+		PageTable(int numPages, int numFrames);
 
 };

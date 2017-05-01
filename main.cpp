@@ -90,8 +90,10 @@ int main(int argc, char* argv[]) {
 
 	int numPages = logicalMemorySize / pageSize;
 	cout << "# Pages: " << numPages << endl;
+	int numFrames = physicalMemorySize / pageSize;
+	cout << "# Frames: " << numFrames << endl;
 
-	PageTable* pageTable = new PageTable(numPages);
+	PageTable* pageTable = new PageTable(numPages, numFrames);
 
 	Replacer* replacer = new ReplacerFIFO(pageTable);
 

@@ -5,6 +5,8 @@
 #include <iostream>
 using namespace std;
 
-PageTable::PageTable(int numPages) {
+PageTable::PageTable(int numPages, int numFrames) {
 	pages = new Page[numPages];
+	this->numPages = numPages;
+	this->numFrames = numFrames;
 }

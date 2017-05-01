@@ -100,15 +100,15 @@ int main(int argc, char* argv[]) {
 
 		int pageNum = getPageNum(memRef);
 		bool canWrite = hasWriteAccess(memRef);
-		Page* page = pageTable->pages[pageNum];
+		Page page = pageTable->pages[pageNum];
 
 		// // Currently, this triggers a segfault if pageNum >= numPages, which
 		// is usually the case (e.g. run program with "8192 16" as arguments)
 		if (hasWriteAccess) {
-			page->dirty = true;
+			page.dirty = true;
 		}
 
-		replacer->process(pageNum, page);
+		replacer->process(pageNum, &page);
 
 	}
 

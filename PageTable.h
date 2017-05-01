@@ -11,7 +11,7 @@ class PageTable {
 	public:
 
 		// The table of page data
-		Page** pages;
+		Page* pages;
 
 		// Constructor
 		PageTable(int numPages);

@@ -97,7 +97,6 @@ int main(int argc, char* argv[]) {
 	Replacer* replacer = new ReplacerFIFO(pageTable);
 
 	int memRef;
-	int i = 0;
 	while (refFile >> memRef) {
 
 		int pageNum = getPageNum(memRef);
@@ -111,12 +110,6 @@ int main(int argc, char* argv[]) {
 		}
 
 		replacer->process(pageNum, page);
-
-		// Stop after 100 references (for testing only)
-		i += 1;
-		if (i == 10) {
-			break;
-		}
 
 	}
 

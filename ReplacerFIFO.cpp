@@ -9,7 +9,7 @@
 using namespace std;
 
 
-ReplacerFIFO::ReplacerFIFO(PageTable* pageTable) : Replacer(pageTable) {
+ReplacerFIFO::ReplacerFIFO(PageTable* pageTable, int numFrames) : Replacer(pageTable, numFrames) {
 	// Constructor doesn't need to do anything currently
 }
 
@@ -22,10 +22,10 @@ Page* ReplacerFIFO::getVictimPage() {
 void ReplacerFIFO::process(Page* page) {
 
 	if (!page->valid) {
-		if (pageTable->numFreeFrames == 0) {
+		if (numFreeFrames == 0) {
 			replaceVictimPageWith(page);
 		} else {
-			pageTable->numFreeFrames -= 1;
+			numFreeFrames -= 1;
 		}
 		pageQueue.push(page);
 		page->valid = true;

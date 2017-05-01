@@ -13,11 +13,15 @@ class Replacer {
 
 	public:
 
+		// The total number of frames in physical memory
+		int numFrames;
+		// The total number of available frames
+		int numFreeFrames;
 		// The number of page faults generated while running the replacement
 		// algorithm
 		int numPageFaults = 0;
 
-		Replacer(PageTable* pageTable);
+		Replacer(PageTable* pageTable, int numFrames);
 		// Replace the victim page with a new page
 		virtual Page* getVictimPage() = 0;
 		// Replace the victim page with a new page

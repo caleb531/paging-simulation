@@ -5,8 +5,10 @@
 #include "PageTable.h"
 using namespace std;
 
-Replacer::Replacer(PageTable* pageTable) {
+Replacer::Replacer(PageTable* pageTable, int numFrames) {
 	this->pageTable = pageTable;
+	this->numFrames = numFrames;
+	this->numFreeFrames = numFrames;
 	numPageFaults = 0;
 }
 

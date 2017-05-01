@@ -93,9 +93,9 @@ int main(int argc, char* argv[]) {
 	int numFrames = physicalMemorySize / pageSize;
 	cout << "# Frames: " << numFrames << endl;
 
-	PageTable* pageTable = new PageTable(numPages, numFrames);
+	PageTable* pageTable = new PageTable(numPages);
 
-	Replacer* replacer = new ReplacerFIFO(pageTable);
+	Replacer* replacer = new ReplacerFIFO(pageTable, numFrames);
 
 	int memRef;
 	while (refFile >> memRef) {

@@ -101,7 +101,6 @@ int main(int argc, char* argv[]) {
 	while (refFile >> memRef) {
 
 		int pageNum = getPageNum(memRef);
-		cout << memRef << " => " << pageNum << endl;
 		bool canWrite = hasWriteAccess(memRef);
 		Page* page = pageTable->pages[pageNum];
 

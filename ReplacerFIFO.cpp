@@ -25,6 +25,7 @@ void ReplacerFIFO::processPage(Page* page) {
 		if (numFreeFrames == 0) {
 			replaceVictimPageWith(page);
 		} else {
+			page->frame = numFrames - numFreeFrames;
 			numFreeFrames -= 1;
 		}
 		pageQueue.push(page);

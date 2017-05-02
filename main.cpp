@@ -4,6 +4,7 @@
  */
 #include <iostream>
 #include <cstdlib>
+#include <string>
 #include <sstream>
 #include <fstream>
 #include "PageTable.h"
@@ -48,6 +49,17 @@ int getIntArg(char* strArg, const char* argLabel) {
 		cerr << "Invalid " << argLabel << ": " << strArg << endl;
 		exit(1);
 	}
+}
+
+// Prettifies a number by adding a comma at every thousands place
+string formatNum(int n) {
+	string formattedNum = to_string(n);
+	int insertPosition = formattedNum.length() - 3;
+	while (insertPosition > 0) {
+		formattedNum.insert(insertPosition, ",");
+		insertPosition -= 3;
+	}
+	return formattedNum;
 }
 
 // Prompt the user for a replacement algorithm to run
@@ -103,17 +115,17 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	cout << "Page size: " << pageSize << " B" << endl;
-	cout << "Physical memory size: " << physicalMemorySize << " MB" << endl;
+	cout << "Page size: " << formatNum(pageSize) << " B" << endl;
+	cout << "Physical memory size: " << formatNum(physicalMemorySize) << " MB" << endl;
 	// Physical memory size is given in MB, but must be converted to B
 	physicalMemorySize *= B_TO_KB * KB_TO_MB;
 
 	ifstream refFile("references.txt");
 
 	int numPages = logicalMemorySize / pageSize;
-	cout << "# Pages: " << numPages << endl;
+	cout << "# Pages: " << formatNum(numPages) << endl;
 	int numFrames = physicalMemorySize / pageSize;
-	cout << "# Frames: " << numFrames << endl;
+	cout << "# Frames: " << formatNum(numFrames) << endl;
 	// Print a blank line for readability
 	cout << endl;
 
@@ -138,7 +150,7 @@ int main(int argc, char* argv[]) {
 
 	}
 
-	cout << "# Page Faults: " << replacer->numPageFaults << endl;
+	cout << "# Page Faults: " << formatNum(replacer->numPageFaults) << endl;
 
 	delete pageTable;
 	delete replacer;

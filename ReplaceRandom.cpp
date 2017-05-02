@@ -1,6 +1,7 @@
 /**
  * Random page replacement algorithm implementation
  */
+#include <cstdlib>
 #include <iostream>
 #include "Page.h"
 #include "PageTable.h"
@@ -9,7 +10,7 @@ using namespace std;
 
 
 ReplacerRandom::ReplacerRandom(PageTable* pageTable, int numFrames) : Replacer(pageTable, numFrames) {
-	// Constructor doesn't need to do anything currently
+	srand(time(NULL));
 }
 
 Page* ReplacerRandom::getVictimPage() {

@@ -104,6 +104,22 @@ bool hasWriteAccess(int ref) {
 	return ref % 2 == 1;
 }
 
+// Exit with error if the page size or physical memory size does not meet the
+// required characteristics
+void checkProgramInput(int pageSize, int physicalMemorySize) {
+	if (pageSize < 256 || pageSize > 8192) {
+		cerr << "Page size must be between 256 and 8192 inclusive" << endl;
+		exit(1);
+	}
+	if (!isPowerOfTwo(pageSize)) {
+		cerr << "Page size must be power of 2" << endl;
+		exit(1);
+	}
+	if (!isPowerOfTwo(physicalMemorySize)) {
+		cerr << "Physical memory size must be power of 2" << endl;
+		exit(1);
+	}
+}
 
 int main(int argc, char* argv[]) {
 
@@ -111,19 +127,7 @@ int main(int argc, char* argv[]) {
 
 	int pageSize = getIntArg(argv[1], "page size");
 	int physicalMemorySize = getIntArg(argv[2], "physical memory size");
-
-	if (pageSize < 256 || pageSize > 8192) {
-		cout << "Page size must be between 256 and 8192 inclusive" << endl;
-		return 1;
-	}
-	else if (!isPowerOfTwo(pageSize)) {
-		cout << "Page size must be power of 2" << endl;
-		return 1;
-	}
-	else if (!isPowerOfTwo(physicalMemorySize)) {
-		cout << "Physical memory size must be power of 2" << endl;
-		return 1;
-	}
+	checkProgramInput(pageSize, physicalMemorySize);
 
 	cout << "Page size: " << formatNum(pageSize) << " B" << endl;
 	cout << "Physical memory size: " << formatNum(physicalMemorySize) << " MB" << endl;
@@ -140,7 +144,6 @@ int main(int argc, char* argv[]) {
 	cout << endl;
 
 	PageTable* pageTable = new PageTable(numPages);
-
 	Replacer* replacer = promptForReplacer(pageTable, numFrames);
 
 	cout << "Running..." << endl;

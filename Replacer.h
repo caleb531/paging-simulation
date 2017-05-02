@@ -19,7 +19,7 @@ class Replacer {
 		int numFreeFrames;
 		// The number of page faults generated while running the replacement
 		// algorithm
-		int numPageFaults = 0;
+		int numPageFaults;
 
 		Replacer(PageTable* pageTable, int numFrames);
 		// Replace the victim page with a new page

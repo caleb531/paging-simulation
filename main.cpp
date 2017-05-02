@@ -84,14 +84,14 @@ Replacer* promptForReplacer(PageTable* pageTable, int numFrames) {
 }
 
 // Get the page number for the given memory reference / binary address
-int getPageNum(int memRef) {
-	return memRef >> 12;
+int getPageNum(int ref) {
+	return ref >> 12;
 }
 
 // Return true if the given byte address has write access; otherwise, return
 // false
-bool hasWriteAccess(int memRef) {
-	return memRef % 2 == 1;
+bool hasWriteAccess(int ref) {
+	return ref % 2 == 1;
 }
 
 
@@ -134,11 +134,11 @@ int main(int argc, char* argv[]) {
 	Replacer* replacer = promptForReplacer(pageTable, numFrames);
 
 	cout << "Running..." << endl;
-	int memRef, numMemRefs;
-	while (refFile >> memRef) {
+	int ref, numRefs;
+	while (refFile >> ref) {
 
-		int pageNum = getPageNum(memRef);
-		bool canWrite = hasWriteAccess(memRef);
+		int pageNum = getPageNum(ref);
+		bool canWrite = hasWriteAccess(ref);
 		Page page = pageTable->pages[pageNum];
 
 		// Currently, this triggers a segfault if pageNum >= numPages, which is
@@ -148,11 +148,11 @@ int main(int argc, char* argv[]) {
 		}
 
 		replacer->processPage(&page);
-		numMemRefs += 1;
+		numRefs += 1;
 
 	}
 
-	cout << "Memory References: " << formatNum(numMemRefs) << endl;
+	cout << "Memory References: " << formatNum(numRefs) << endl;
 	cout << "Page Faults: " << formatNum(replacer->numPageFaults) << endl;
 
 	delete pageTable;

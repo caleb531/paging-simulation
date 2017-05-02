@@ -134,7 +134,7 @@ int main(int argc, char* argv[]) {
 	Replacer* replacer = promptForReplacer(pageTable, numFrames);
 
 	cout << "Running..." << endl;
-	int memRef;
+	int memRef, numMemRefs;
 	while (refFile >> memRef) {
 
 		int pageNum = getPageNum(memRef);
@@ -148,9 +148,11 @@ int main(int argc, char* argv[]) {
 		}
 
 		replacer->processPage(&page);
+		numMemRefs += 1;
 
 	}
 
+	cout << "Memory References: " << formatNum(numMemRefs) << endl;
 	cout << "Page Faults: " << formatNum(replacer->numPageFaults) << endl;
 
 	delete pageTable;

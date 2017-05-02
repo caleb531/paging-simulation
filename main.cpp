@@ -133,6 +133,7 @@ int main(int argc, char* argv[]) {
 
 	Replacer* replacer = promptForReplacer(pageTable, numFrames);
 
+	cout << "Running..." << endl;
 	int memRef;
 	while (refFile >> memRef) {
 

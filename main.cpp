@@ -3,18 +3,21 @@
  * Caleb Evans, Jonathan Tapia
  */
 #include <iostream>
+#include <iomanip>
 #include <cstdlib>
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <sys/time.h>
 #include "PageTable.h"
 #include "ReplacerRandom.h"
 #include "ReplacerFIFO.h"
 using namespace std;
 
-// Constants used for byte conversions
+// Constants used for conversions
 static const int B_TO_KB = 1024;
 static const int KB_TO_MB = 1024;
+static const int MS_TO_S = 1000;
 // The size of the logical memory (in bytes)
 static const int logicalMemorySize = 128 * B_TO_KB * KB_TO_MB;
 
@@ -23,6 +26,13 @@ void printProgramHeader() {
 	cout << "CS 433 Paging Simulation" << endl;
 	cout << "Authors: Caleb Evans, Jonathan Tapia" << endl;
 	cout << endl;
+}
+
+// Get the current time as a UNIX timestampts (in seconds)
+double getCurrentTime() {
+	timeval timePtr;
+	gettimeofday(&timePtr, NULL);
+	return timePtr.tv_sec + (timePtr.tv_usec / 1000000.0);
 }
 
 // Return true if the given number is a power of two; otherwise, return false
@@ -135,6 +145,7 @@ int main(int argc, char* argv[]) {
 
 	cout << "Running..." << endl;
 	int ref, numRefs;
+	double startTime = getCurrentTime();
 	while (refFile >> ref) {
 
 		int pageNum = getPageNum(ref);
@@ -154,6 +165,12 @@ int main(int argc, char* argv[]) {
 
 	cout << "Memory References: " << formatNum(numRefs) << endl;
 	cout << "Page Faults: " << formatNum(replacer->numPageFaults) << endl;
+	double endTime = getCurrentTime();
+	// Only display total time to 2 decimal places
+	cout << "Total Time: "
+		<< fixed << setprecision(2)
+		<< (endTime - startTime) << "s"
+		<< endl;
 
 	delete pageTable;
 	delete replacer;

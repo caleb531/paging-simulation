@@ -123,9 +123,9 @@ int main(int argc, char* argv[]) {
 	ifstream refFile("references.txt");
 
 	int numPages = logicalMemorySize / pageSize;
-	cout << "# Pages: " << formatNum(numPages) << endl;
+	cout << "Pages: " << formatNum(numPages) << endl;
 	int numFrames = physicalMemorySize / pageSize;
-	cout << "# Frames: " << formatNum(numFrames) << endl;
+	cout << "Frames: " << formatNum(numFrames) << endl;
 	// Print a blank line for readability
 	cout << endl;
 
@@ -151,7 +151,7 @@ int main(int argc, char* argv[]) {
 
 	}
 
-	cout << "# Page Faults: " << formatNum(replacer->numPageFaults) << endl;
+	cout << "Page Faults: " << formatNum(replacer->numPageFaults) << endl;
 
 	delete pageTable;
 	delete replacer;

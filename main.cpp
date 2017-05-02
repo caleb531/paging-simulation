@@ -144,6 +144,7 @@ int main(int argc, char* argv[]) {
 	cout << endl;
 
 	PageTable* pageTable = new PageTable(numPages);
+
 	Replacer* replacer = promptForReplacer(pageTable, numFrames);
 
 	cout << "Running..." << endl;
@@ -165,10 +166,11 @@ int main(int argc, char* argv[]) {
 		numRefs += 1;
 
 	}
+	refFile.close();
+	double endTime = getCurrentTime();
 
 	cout << "Memory References: " << formatNum(numRefs) << endl;
 	cout << "Page Faults: " << formatNum(replacer->numPageFaults) << endl;
-	double endTime = getCurrentTime();
 	// Only display total time to 2 decimal places
 	cout << "Total Time: "
 		<< fixed << setprecision(2)
@@ -178,6 +180,5 @@ int main(int argc, char* argv[]) {
 	delete pageTable;
 	delete replacer;
 
-	refFile.close();
 	return 0;
 }

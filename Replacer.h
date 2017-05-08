@@ -21,6 +21,9 @@ class Replacer {
 		// algorithm
 		int numPageFaults;
 
+		// Total number of flushes (times when the victim page was dirty)
+		int numFlushes;
+
 		Replacer(PageTable* pageTable, int numFrames);
 		// Replace the victim page with a new page
 		virtual Page* getVictimPage() = 0;

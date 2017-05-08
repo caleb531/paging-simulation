@@ -10,6 +10,7 @@ Replacer::Replacer(PageTable* pageTable, int numFrames) {
 	this->numFrames = numFrames;
 	this->numFreeFrames = numFrames;
 	numPageFaults = 0;
+	numFlushes = 0;
 }
 
 Page* Replacer::replaceVictimPageWith(Page* newPage) {
@@ -18,5 +19,11 @@ Page* Replacer::replaceVictimPageWith(Page* newPage) {
 	newPage->frame = victimPage->frame;
 	victimPage->frame = -1;
 	numPageFaults += 1;
+
+	if(victimPage->dirty){
+		numFlushes += 1;
+		victimPage->dirty = false;
+	}
+
 	return victimPage;
 }

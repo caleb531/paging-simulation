@@ -176,6 +176,7 @@ int main(int argc, char* argv[]) {
 
 	cout << "Memory References: " << formatNum(numRefs) << endl;
 	cout << "Page Faults: " << formatNum(replacer->numPageFaults) << endl;
+	cout << "Flushes: " << formatNum(replacer->numFlushes) << endl;
 	// Only display total time to 2 decimal places
 	cout << "Total Time: "
 		<< fixed << setprecision(2)

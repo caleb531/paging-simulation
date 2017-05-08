@@ -2,7 +2,7 @@
  * Random page replacement algorithm definition
  */
 #pragma once
-#include <set>
+#include <vector>
 #include <random>
 #include "PageTable.h"
 #include "Replacer.h"
@@ -14,7 +14,7 @@ class ReplacerRandom : public Replacer {
 
 		// Keep a list of the page numbers of the currently-valid pages (to
 		// choose from randomly later)
-		set<int> validPages;
+		vector<int> validPages;
 
 		// Used to create random numbers
 		random_device randomizer;

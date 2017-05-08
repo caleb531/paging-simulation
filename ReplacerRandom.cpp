@@ -15,11 +15,7 @@ ReplacerRandom::ReplacerRandom(PageTable* pageTable, int numFrames) : Replacer(p
 
 Page* ReplacerRandom::getVictimPage() {
 	Page* victimPage;
-	// See <http://stackoverflow.com/a/3052796/560642> for how to select a
-	// random element from a set
-	set<int>::const_iterator pageIterator(validPages.begin());
-	advance(pageIterator, randomizer() % validPages.size());
-	int victimPageIndex = *pageIterator;
+	int victimPageIndex = randomizer() % validPages.size();
 	victimPage = &(pageTable->pages[victimPageIndex]);
 	return victimPage;
 }
@@ -29,13 +25,15 @@ void ReplacerRandom::processPage(Page* page) {
 	if (!page->valid) {
 		if (numFreeFrames == 0) {
 			Page* victimPage = replaceVictimPageWith(page);
-			validPages.erase(victimPage->pageNum);
+			// Efficiently remove victim page from valid page list
+			swap(validPages[victimPage->pageNum], validPages[page->pageNum]);
+			validPages.pop_back();
 		} else {
 			page->frame = numFrames - numFreeFrames;
 			numFreeFrames -= 1;
 			//numPageFaults++;
 		}
 		page->valid = true;
-		validPages.insert(page->pageNum);
+		validPages.push_back(page->pageNum);
 	}
 }

@@ -12,6 +12,7 @@
 #include "PageTable.h"
 #include "ReplacerRandom.h"
 #include "ReplacerFIFO.h"
+#include "ReplacerLRU.h"
 using namespace std;
 
 // Constants used for conversions
@@ -77,6 +78,7 @@ Replacer* promptForReplacer(PageTable* pageTable, int numFrames) {
 	cout << "Available replacement algos:" << endl;
 	cout << "  1. Random" << endl;
 	cout << "  2. First-In-First-Out (FIFO)" << endl;
+	cout << "  3. Least Recently Used (LRU)" << endl;
 	cout << "Choose a replacer's number: ";
 	int replacerChoice;
 	cin >> replacerChoice;
@@ -87,6 +89,9 @@ Replacer* promptForReplacer(PageTable* pageTable, int numFrames) {
 		case 2:
 			cout << "You chose FIFO" << endl;
 			return new ReplacerFIFO(pageTable, numFrames);
+		case 3:
+			cout << "You chose LRU" << endl;
+			return new ReplacerLRU(pageTable, numFrames);
 		default:
 			cout << "Invalid replacer. Aborting." << endl;
 			exit(1);

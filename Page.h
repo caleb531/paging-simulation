@@ -26,3 +26,9 @@ class Page {
 		Page();
 
 };
+
+// Define a custom comparator so Page pointers can be used in priority queues
+class PageComparator {
+	public:
+		bool operator()(Page* a, Page* b);
+};

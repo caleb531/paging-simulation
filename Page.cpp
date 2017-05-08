@@ -11,3 +11,7 @@ Page::Page() {
 	dirty = false;
 	valid = false;
 }
+
+bool PageComparator::operator ()(Page* a, Page* b) {
+	return a->lastAccessTime < b->lastAccessTime;
+}

@@ -94,8 +94,8 @@ Replacer* promptForReplacer(PageTable* pageTable, int numFrames) {
 }
 
 // Get the page number for the given memory reference / binary address
-int getPageNum(int ref) {
-	return ref >> 12;
+int getPageNum(int ref, int pageSize) {
+	return ref / pageSize;
 }
 
 // Return true if the given byte address has write access; otherwise, return
@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) {
 	double startTime = getCurrentTime();
 	while (refFile >> ref) {
 
-		int pageNum = getPageNum(ref);
+		int pageNum = getPageNum(ref, pageSize);
 		bool canWrite = hasWriteAccess(ref);
 		Page page = pageTable->pages[pageNum];
 

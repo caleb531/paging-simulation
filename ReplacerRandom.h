@@ -3,6 +3,7 @@
  */
 #pragma once
 #include <set>
+#include <random>
 #include "PageTable.h"
 #include "Replacer.h"
 using namespace std;
@@ -14,6 +15,9 @@ class ReplacerRandom : public Replacer {
 		// Keep a list of the page numbers of the currently-valid pages (to
 		// choose from randomly later)
 		set<int> validPages;
+
+		// Used to create random numbers
+		random_device randomizer;
 
 	public:
 

@@ -18,9 +18,9 @@ Page* ReplacerRandom::getVictimPage() {
 	// See <http://stackoverflow.com/a/3052796/560642> for how to select a
 	// random element from a set
 	set<int>::const_iterator pageIterator(validPages.begin());
-	advance(pageIterator, rand() % validPages.size());
+	advance(pageIterator, randomizer() % validPages.size());
 	int victimPageIndex = *pageIterator;
-	victimPage = &pageTable->pages[victimPageIndex];
+	victimPage = &(pageTable->pages[victimPageIndex]);
 	return victimPage;
 }
 
@@ -33,6 +33,7 @@ void ReplacerRandom::processPage(Page* page) {
 		} else {
 			page->frame = numFrames - numFreeFrames;
 			numFreeFrames -= 1;
+			//numPageFaults++;
 		}
 		page->valid = true;
 		validPages.insert(page->pageNum);

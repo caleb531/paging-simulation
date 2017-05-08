@@ -16,6 +16,7 @@ Page* Replacer::replaceVictimPageWith(Page* newPage) {
 	Page* victimPage = getVictimPage();
 	victimPage->valid = false;
 	newPage->frame = victimPage->frame;
+	victimPage->frame = -1;
 	numPageFaults += 1;
 	return victimPage;
 }

@@ -16,7 +16,7 @@ ReplacerRandom::ReplacerRandom(PageTable* pageTable, int numFrames) : Replacer(p
 Page* ReplacerRandom::getVictimPage() {
 	Page* victimPage;
 	int victimPageIndex = randomizer() % validPages.size();
-	victimPage = &(pageTable->pages[victimPageIndex]);
+	victimPage = pageTable->pages[victimPageIndex];
 	return victimPage;
 }
 
@@ -31,7 +31,7 @@ void ReplacerRandom::processPage(Page* page) {
 		} else {
 			page->frame = numFrames - numFreeFrames;
 			numFreeFrames -= 1;
-			//numPageFaults++;
+			numPageFaults++;
 		}
 		page->valid = true;
 		validPages.push_back(page->pageNum);

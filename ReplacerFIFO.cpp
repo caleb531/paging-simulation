@@ -26,7 +26,7 @@ void ReplacerFIFO::processPage(Page* page) {
 		} else {
 			page->frame = numFrames - numFreeFrames;
 			numFreeFrames -= 1;
-			//numPageFaults++;
+			numPageFaults++;
 		}
 		pageQueue.push(page);
 		page->valid = true;

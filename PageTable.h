@@ -11,12 +11,14 @@ class PageTable {
 	public:
 
 		// The table of page data
-		Page* pages;
+		Page** pages;
 
 		// The total number of pages in logical memory
 		int numPages;
 
 		// Constructor
 		PageTable(int numPages);
+		// Destructor
+		~PageTable();
 
 };

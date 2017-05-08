@@ -13,5 +13,5 @@ Page::Page() {
 }
 
 bool PageComparator::operator ()(Page* a, Page* b) {
-	return a->lastAccessTime < b->lastAccessTime;
+	return a->lastAccessTime > b->lastAccessTime;
 }

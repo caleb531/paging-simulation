@@ -164,7 +164,7 @@ int main(int argc, char* argv[]) {
 
 		// Currently, this triggers a segfault if pageNum >= numPages, which is
 		// usually the case (e.g. run program with "8192 16" as arguments)
-		if (hasWriteAccess) {
+		if (canWrite) {
 			page.dirty = true;
 		}
 

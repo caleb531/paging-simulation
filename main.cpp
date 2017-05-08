@@ -153,7 +153,8 @@ int main(int argc, char* argv[]) {
 	Replacer* replacer = promptForReplacer(pageTable, numFrames);
 
 	cout << "Running..." << endl;
-	int ref, numRefs;
+	int ref = 0;
+	int numRefs = 0;
 	double startTime = getCurrentTime();
 	while (refFile >> ref) {
 

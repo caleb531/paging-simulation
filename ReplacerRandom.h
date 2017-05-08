@@ -17,7 +17,7 @@ class ReplacerRandom : public Replacer {
 		vector<int> validPages;
 
 		// Used to create random numbers
-		random_device randomizer;
+		//random_device randomizer;
 
 	public:
 

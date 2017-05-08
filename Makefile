@@ -1,6 +1,7 @@
 #!/usr/bin/make
 
-CC = g++
+CXX = g++
+CXXFLAGS = -std=c++11
 SRC = *.cpp
 PROG = sim.out
 
@@ -13,4 +14,4 @@ clean:
 
 # Compile the program from the latest source
 $(PROG): $(SRC)
-	$(CC) $(SRC) -o $(PROG)
+	$(CXX) $(SRC) $(CXXFLAGS) -o $(PROG)

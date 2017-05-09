@@ -5,7 +5,7 @@
 #include "PageTable.h"
 #include "ReplacerLRU.h"
 #include <iostream>
-#include <ctime>
+#include <sys/time.h>
 
 using namespace std;
 
@@ -32,5 +32,9 @@ void ReplacerLRU::processPage(Page* page) {
 		page->valid = true;
 	}
 
-	page->lastAccessTime = time(NULL);
+	timeval timePtr;
+	gettimeofday(&timePtr, NULL);
+
+	page->lastAccessTime = timePtr.tv_sec + (timePtr.tv_usec / 1000000.0);
+;
 }

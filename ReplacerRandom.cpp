@@ -17,6 +17,9 @@ Page* ReplacerRandom::getVictimPage() {
 	Page* victimPage;
 	int victimPageIndex = rand() % validPages.size();
 	victimPage = pageTable->pages[victimPageIndex];
+	// Efficiently remove victim page from valid page list
+	swap(validPages[victimPageIndex], validPages[validPages.size() - 1]);
+	validPages.pop_back();
 	return victimPage;
 }
 
@@ -25,9 +28,6 @@ void ReplacerRandom::processPage(Page* page) {
 	if (!page->valid) {
 		if (numFreeFrames == 0) {
 			Page* victimPage = replaceVictimPageWith(page);
-			// Efficiently remove victim page from valid page list
-			swap(validPages[victimPage->pageNum], validPages[page->pageNum]); //This line is causing a segfault!
-			validPages.pop_back();
 		} else {
 			page->frame = numFrames - numFreeFrames;
 			numFreeFrames -= 1;

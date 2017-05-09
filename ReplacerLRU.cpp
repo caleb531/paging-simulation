@@ -5,6 +5,7 @@
 #include "PageTable.h"
 #include "ReplacerLRU.h"
 #include <iostream>
+#include <ctime>
 
 using namespace std;
 
@@ -30,4 +31,6 @@ void ReplacerLRU::processPage(Page* page) {
 		pageQueue.push(page);
 		page->valid = true;
 	}
+
+	page->lastAccessTime = time(NULL);
 }

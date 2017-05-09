@@ -13,7 +13,7 @@ class ReplacerLRU : public Replacer {
 	protected:
 
 		priority_queue<Page*, vector<Page*>, PageComparator> pageQueue;
-
+		
 	public:
 
 		ReplacerLRU(PageTable* pageTable, int numFrames);

@@ -36,5 +36,5 @@ void ReplacerLRU::processPage(Page* page) {
 	gettimeofday(&timePtr, NULL);
 
 	page->lastAccessTime = timePtr.tv_sec + (timePtr.tv_usec / 1000000.0);
-;
+
 }

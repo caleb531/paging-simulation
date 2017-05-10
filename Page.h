@@ -20,7 +20,7 @@ class Page {
 		// A flag indicating if the page is valid
 		bool valid;
 		// The time the page was last accessed (used for LRU)
-		int lastAccessTime;
+		double lastAccessTime;
 
 		// Constructor
 		Page();

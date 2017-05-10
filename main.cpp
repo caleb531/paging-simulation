@@ -169,7 +169,7 @@ int main(int argc, char* argv[]) {
 		}
 
 		replacer->processPage(page);
-		numRefs += 1;
+		numRefs++;
 
 	}
 	refFile.close();

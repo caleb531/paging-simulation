@@ -18,10 +18,10 @@ Page* Replacer::replaceVictimPageWith(Page* newPage) {
 	victimPage->valid = false;
 	newPage->frame = victimPage->frame;
 	victimPage->frame = -1;
-	numPageFaults += 1;
+	numPageFaults++;
 
 	if(victimPage->dirty){
-		numFlushes += 1;
+		numFlushes++;
 		victimPage->dirty = false;
 	}
 

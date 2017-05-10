@@ -24,6 +24,8 @@ class Page {
 
 		// Constructor
 		Page();
+		// Update the last access time of the page to the current time
+		void updateLastAccessTime();
 
 };
 

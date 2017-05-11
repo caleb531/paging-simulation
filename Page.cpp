@@ -2,6 +2,7 @@
  * Page implementation
  */
 #include "Page.h"
+#include <cstdlib>
 #include <sys/time.h>
 using namespace std;
 

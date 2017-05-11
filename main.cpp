@@ -1,6 +1,16 @@
 /**
  * CS 433 Programming Assignment 5: Memory Paging Simulation
  * Caleb Evans, Jonathan Tapia
+ * May 12, 2017
+ * @description
+ * This program includes implementations of several memory paging algorithms:
+ * Random, FIFO, and LRU.
+ * @howToRun
+ * Run make to compile the program, then execute the compiled program by running
+ * ./sim.out with three arguments. The first argument is the page size is bytes
+ * (B). The second argument is the physical memory size in megabytes (MB). When
+ * the program starts, you will be prompted to choose a replacement algorithm
+ * under which to run the simulation.
  */
 #include <iostream>
 #include <iomanip>

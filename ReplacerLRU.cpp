@@ -20,6 +20,8 @@ Page* ReplacerLRU::getVictimPage() {
 }
 
 void ReplacerLRU::processPage(Page* page) {
+
+	page->updateLastAccessTime();
 	if (!page->valid) {
 		if (numFreeFrames == 0) {
 			replaceVictimPageWith(page);
@@ -27,10 +29,8 @@ void ReplacerLRU::processPage(Page* page) {
 			page->frame = numFrames - numFreeFrames;
 			numFreeFrames -= 1;
 		}
-		pageQueue.push(page);
 		page->valid = true;
 	}
-
-	page->updateLastAccessTime();
+	pageQueue.push(page);
 
 }
